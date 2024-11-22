@@ -20,7 +20,7 @@ for raceNum, race in enumerate(races):
 	winningButtonPressDurationBounds = (roots([-1, time, -winningDistance]))
 
 	# If lower root is an integer the difference is non inclusive
-	if winningButtonPressDurationBounds[0].is_integer():
+	if winningButtonPressDurationBounds[1].is_integer():
 		winningButtonPressDurationBounds[0] += 1
 
 	# The integer of the difference between the bounds gives us the number of winning methods
