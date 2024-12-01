@@ -15,6 +15,6 @@ rightNumsSorted = sorted(rightNums)
 
 for i, num in enumerate(leftNumsSorted):
 	sum += abs(num - rightNumsSorted[i])
-	print(sum)
+	print(f'{sum = }')
 
 # Passed! - 2164381
