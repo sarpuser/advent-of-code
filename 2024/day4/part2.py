@@ -31,7 +31,7 @@ def countX_MAS () -> int:
 
 		# One of the coords of the same letter should be the same because if not then it means
 		# that the same letter is on both ends of the diagonal, eg. SAS, MAM
-		if diagonalMCoords[0][0] == diagonalMCoords[1][0] or diagonalMCoords[0][1] == diagonalMCoords[0][1]:
+		if diagonalMCoords[0][0] == diagonalMCoords[1][0] or diagonalMCoords[0][1] == diagonalMCoords[1][1]:
 			numXMAS += 1
 			print(f'Added X-MAS at {aCoordinate}, {numXMAS = }, {diagonalMCoords = }, {diagonalSCoords = }')
 
