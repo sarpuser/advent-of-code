@@ -9,10 +9,7 @@ for bank in banks:
     searchIndex = 0
 
     for i in range(12):
-        if i != 11:
-            maxJoltageBattery = max(joltages[searchIndex : -(11 - i)])
-        else:
-            maxJoltageBattery = max(joltages[searchIndex:])
+        maxJoltageBattery = max(joltages[searchIndex : -(11 - i) or None])
         maxJoltageStr += str(maxJoltageBattery)
         searchIndex = joltages[searchIndex:].index(maxJoltageBattery) + searchIndex + 1
 
