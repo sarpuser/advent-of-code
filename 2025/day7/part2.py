@@ -1,38 +1,34 @@
 # https://adventofcode.com/2025/day/7
 
-numPathsFromPosition = {}
-checkedPositions = set()
+pathCache = {}
 manifoldGrid = []
 
 
-def countPaths(startPosition: tuple[int]) -> int:
+def countPathsFrom(row, col):
     global checkedPositions
-    global numPathsFromPosition
     global manifoldGrid
 
-    if startPosition[0] == len(manifoldGrid):
+    if row == len(manifoldGrid):
         return 1
 
-    childRow = startPosition[0] + 1
+    if (row, col) in pathCache:
+        return pathCache[(row, col)]
 
-    if manifoldGrid[startPosition[0]][startPosition[1]] == "^":
-        checkedPositions.add(startPosition)
-        leftChild = (childRow, startPosition[1] - 1)
-        rightChild = (childRow, startPosition[1] + 1)
-        children = [leftChild, rightChild]
+    childRow = row + 1
+
+    if manifoldGrid[row][col] == "^":
+        children = [(childRow, col - 1), (childRow, col + 1)]
     else:
-        children = [(childRow, startPosition[1])]
+        children = [(childRow, col)]
 
-    print(f"Checking: {startPosition}, children: {children}")
+    print(f"Checking: {(row, col)}, children: {children}")
 
     numPaths = 0
-    for child in children:
-        if child not in checkedPositions:
-            numPaths += countPaths(child)
-        else:
-            numPaths += numPathsFromPosition[child]
+    for childRow, childCol in children:
+        pathCount = countPathsFrom(childRow, childCol)
+        numPaths += pathCount
 
-    numPathsFromPosition[startPosition] = numPaths
+    pathCache[(row, col)] = numPaths
 
     return numPaths
 
@@ -42,8 +38,8 @@ with open("input.txt", "r") as fin:
         line = line.strip("\n")
         manifoldGrid.append(list(line))
 
-startingPoint = (0, manifoldGrid[0].index("S"))
-numPaths = countPaths(startingPoint)
+numPaths = countPathsFrom(0, manifoldGrid[0].index("S"))
 print(f"num paths: {numPaths}")
 
 # Passed! - 135656430050438
+# Cleaned up with Claude after passing
